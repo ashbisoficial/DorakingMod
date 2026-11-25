@@ -15,8 +15,7 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.resources.ResourceLocation;
 
 /**
- * Modelo propio del Dueno de Doraking: complexion robusta, gorra con visera, lentes,
- * y brazos cruzados al frente. Textura 128x64 (textures/entity/dueno.png).
+ * Modelo propio del Dueno de Doraking: complexion robusta, gorra con visera, lentes y barba. Textura 128x64 (textures/entity/dueno.png).
  */
 public class DuenoModel extends EntityModel<DuenoEntity> {
     public static final ModelLayerLocation LAYER =
@@ -26,12 +25,16 @@ public class DuenoModel extends EntityModel<DuenoEntity> {
     private final ModelPart head;
     private final ModelPart rightLeg;
     private final ModelPart leftLeg;
+    private final ModelPart rightArm;
+    private final ModelPart leftArm;
 
     public DuenoModel(ModelPart root) {
         this.root = root;
         this.head = root.getChild("head");
         this.rightLeg = root.getChild("right_leg");
         this.leftLeg = root.getChild("left_leg");
+        this.rightArm = root.getChild("right_arm");
+        this.leftArm = root.getChild("left_arm");
     }
 
     public static LayerDefinition createBodyLayer() {
@@ -48,27 +51,26 @@ public class DuenoModel extends EntityModel<DuenoEntity> {
         head.addOrReplaceChild("glasses",
                 CubeListBuilder.create().texOffs(94, 0).addBox(-4.5f, -5f, -5f, 9f, 3f, 1f), PartPose.ZERO);
 
-        r.addOrReplaceChild("body",
-                CubeListBuilder.create().texOffs(0, 16).addBox(-5.5f, 0f, -3.5f, 11f, 12f, 7f),
+        // torso algo mas ancho que el de un jugador, con pancita
+        PartDefinition body = r.addOrReplaceChild("body",
+                CubeListBuilder.create().texOffs(0, 16).addBox(-5f, 0f, -3f, 10f, 12f, 6f),
                 PartPose.offset(0f, 0f, 0f));
+        body.addOrReplaceChild("belly",
+                CubeListBuilder.create().texOffs(32, 16).addBox(-4f, 5f, -5f, 8f, 6f, 2f), PartPose.ZERO);
 
-        // brazos cruzados: dos brazos cortos hacia adelante + antebrazo cruzado
         r.addOrReplaceChild("right_arm",
-                CubeListBuilder.create().texOffs(36, 16).addBox(-2f, -1f, -2f, 4f, 6f, 4f),
-                PartPose.offsetAndRotation(-7.5f, 2f, 0f, -0.8f, 0f, 0f));
+                CubeListBuilder.create().texOffs(52, 16).addBox(-2f, -2f, -2f, 4f, 12f, 4f),
+                PartPose.offset(-7f, 2f, 0f));
         r.addOrReplaceChild("left_arm",
-                CubeListBuilder.create().texOffs(36, 16).mirror().addBox(-2f, -1f, -2f, 4f, 6f, 4f),
-                PartPose.offsetAndRotation(7.5f, 2f, 0f, -0.8f, 0f, 0f));
-        r.addOrReplaceChild("crossed_arms",
-                CubeListBuilder.create().texOffs(52, 16).addBox(-6f, -2f, -2f, 12f, 4f, 4f),
-                PartPose.offset(0f, 7f, -4.5f));
+                CubeListBuilder.create().texOffs(52, 16).mirror().addBox(-2f, -2f, -2f, 4f, 12f, 4f),
+                PartPose.offset(7f, 2f, 0f));
 
         r.addOrReplaceChild("right_leg",
                 CubeListBuilder.create().texOffs(0, 36).addBox(-2.5f, 0f, -2.5f, 5f, 12f, 5f),
-                PartPose.offset(-2.7f, 12f, 0f));
+                PartPose.offset(-2.6f, 12f, 0f));
         r.addOrReplaceChild("left_leg",
                 CubeListBuilder.create().texOffs(0, 36).mirror().addBox(-2.5f, 0f, -2.5f, 5f, 12f, 5f),
-                PartPose.offset(2.7f, 12f, 0f));
+                PartPose.offset(2.6f, 12f, 0f));
 
         return LayerDefinition.create(mesh, 128, 64);
     }
@@ -80,6 +82,10 @@ public class DuenoModel extends EntityModel<DuenoEntity> {
         head.xRot = headPitch * ((float) Math.PI / 180f);
         rightLeg.xRot = (float) Math.cos(limbSwing * 0.6662f) * 1.2f * limbSwingAmount;
         leftLeg.xRot = (float) Math.cos(limbSwing * 0.6662f + Math.PI) * 1.2f * limbSwingAmount;
+        rightArm.xRot = (float) Math.cos(limbSwing * 0.6662f + Math.PI) * 0.8f * limbSwingAmount + 0.1f;
+        leftArm.xRot = (float) Math.cos(limbSwing * 0.6662f) * 0.8f * limbSwingAmount + 0.1f;
+        rightArm.zRot = 0.05f;
+        leftArm.zRot = -0.05f;
     }
 
     @Override
