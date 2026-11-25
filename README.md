@@ -22,5 +22,6 @@ El .jar queda en build/libs/doraking-1.0.0.jar -> ponlo en la carpeta mods.
 - 1.1.0: puesto de 3 bloques con toldo y decoracion; dueno con modelo 3D propio.
 - 1.2.0: sabores pastelera y nutella.
 - 1.3.0: puesto de 3 de ancho x 3 de alto x 5 de largo (45 bloques, se coloca con 1 item); dueno rediseñado con ropa de la primera foto.
+- 1.3.1: lentes del dueno mas finos.
 
 Regla: cada modificacion sube la version en `build.gradle`; el .jar y el Release se llaman doraking-<version>.

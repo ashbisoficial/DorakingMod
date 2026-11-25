@@ -49,7 +49,7 @@ public class DuenoModel extends EntityModel<DuenoEntity> {
         head.addOrReplaceChild("brim",
                 CubeListBuilder.create().texOffs(68, 0).addBox(-4.5f, -6f, -8.5f, 9f, 1f, 4f), PartPose.ZERO);
         head.addOrReplaceChild("glasses",
-                CubeListBuilder.create().texOffs(94, 0).addBox(-4.5f, -5f, -5f, 9f, 3f, 1f), PartPose.ZERO);
+                CubeListBuilder.create().texOffs(94, 0).addBox(-4.5f, -5f, -4.5f, 9f, 2f, 1f), PartPose.ZERO);
 
         // torso algo mas ancho que el de un jugador, con pancita
         PartDefinition body = r.addOrReplaceChild("body",
