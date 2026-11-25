@@ -20,16 +20,19 @@ jobs:
       - uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.1.1
+      - name: Read version
+        id: ver
+        run: echo "v=$(grep -oP "^version = '\K[^']+" build.gradle)" >> "$GITHUB_OUTPUT"
       - name: Build
         run: gradle build --no-daemon
       - name: Upload jar as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: doraking-jar
+          name: doraking-${{ steps.ver.outputs.v }}
           path: build/libs/doraking-*.jar
       - name: Publish release with the jar
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0-build-${{ github.run_number }}
-          name: Doraking 1.0.0 (build ${{ github.run_number }})
-          files: build/libs/doraking-1.0.0.jar
+          tag_name: v${{ steps.ver.outputs.v }}
+          name: Doraking ${{ steps.ver.outputs.v }}
+          files: build/libs/doraking-${{ steps.ver.outputs.v }}.jar

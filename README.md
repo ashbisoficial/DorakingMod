@@ -16,3 +16,10 @@ Requiere JDK 17. Copia esta carpeta sobre el MDK oficial de Forge 1.20.1-47.3.0
     gradlew build
 
 El .jar queda en build/libs/doraking-1.0.0.jar -> ponlo en la carpeta mods.
+
+## Versiones
+- 1.0.0: dorakines (anko, manjar), puesto y dueno basicos.
+- 1.1.0: puesto de 3 bloques con toldo y decoracion; dueno con modelo 3D propio.
+- 1.2.0: sabores pastelera y nutella.
+
+Regla: cada modificacion sube la version en `build.gradle`; el .jar y el Release se llaman doraking-<version>.
