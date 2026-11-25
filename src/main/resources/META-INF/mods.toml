@@ -1,0 +1,23 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="doraking"
+version="${file.jarVersion}"
+displayName="Doraking"
+description='''Mod oficial de Doraking: dorakines, el puesto y su dueno comerciante.'''
+
+[[dependencies.doraking]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.doraking]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "doraking:block/puesto_doraking" },
+    "facing=east":  { "model": "doraking:block/puesto_doraking", "y": 90 },
+    "facing=south": { "model": "doraking:block/puesto_doraking", "y": 180 },
+    "facing=west":  { "model": "doraking:block/puesto_doraking", "y": 270 }
+  }
+}
