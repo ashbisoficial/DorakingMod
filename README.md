@@ -4,7 +4,7 @@ Mod patrocinador: dorakines, puesto y dueno comerciante.
 
 - Sin recetas de crafteo. Sin generacion en el mundo.
 - Todo se obtiene del inventario creativo (pestana "Doraking") o comerciando con el Dueno.
-- Dorakin de Anko: Regeneracion. Dorakin de Manjar: Velocidad.
+- Sabores: Anko (Regeneracion), Manjar (Velocidad), Pastelera (Absorcion), Nutella (Salto).
 - Puesto Doraking: bloque decorativo con el letrero del logo.
 - Dueno de Doraking: aparece SOLO con su huevo de aparicion; invulnerable; vende por esmeraldas
   (precios en entity/DuenoEntity.java, metodo updateTrades).

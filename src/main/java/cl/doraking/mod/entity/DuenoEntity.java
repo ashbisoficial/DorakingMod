@@ -67,14 +67,13 @@ public class DuenoEntity extends AbstractVillager {
     @Override
     protected void updateTrades() {
         MerchantOffers offers = getOffers();
-        offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 2),
-                new ItemStack(ModItems.DORAKIN_ANKO.get(), 1), 9999, 0, 0.0f));
-        offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 2),
-                new ItemStack(ModItems.DORAKIN_MANJAR.get(), 1), 9999, 0, 0.0f));
-        offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 5),
-                new ItemStack(ModItems.DORAKIN_ANKO.get(), 3), 9999, 0, 0.0f));
-        offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 5),
-                new ItemStack(ModItems.DORAKIN_MANJAR.get(), 3), 9999, 0, 0.0f));
+        net.minecraft.world.item.Item[] sabores = {
+                ModItems.DORAKIN_ANKO.get(), ModItems.DORAKIN_MANJAR.get(),
+                ModItems.DORAKIN_PASTELERA.get(), ModItems.DORAKIN_NUTELLA.get() };
+        for (net.minecraft.world.item.Item sabor : sabores) {
+            offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 2), new ItemStack(sabor, 1), 9999, 0, 0.0f));
+            offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 5), new ItemStack(sabor, 3), 9999, 0, 0.0f));
+        }
     }
 
     @Override

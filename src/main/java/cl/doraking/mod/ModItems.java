@@ -28,6 +28,20 @@ public class ModItems {
                     .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600, 0), 1.0f)
                     .build())));
 
+    /** Dorakin de pastelera: absorcion. Solo se consigue comerciando. */
+    public static final RegistryObject<Item> DORAKIN_PASTELERA = ITEMS.register("dorakin_pastelera",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
+                    .nutrition(8).saturationMod(0.8f)
+                    .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 1.0f)
+                    .build())));
+
+    /** Dorakin de nutella: salto. Solo se consigue comerciando. */
+    public static final RegistryObject<Item> DORAKIN_NUTELLA = ITEMS.register("dorakin_nutella",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
+                    .nutrition(8).saturationMod(0.8f)
+                    .effect(() -> new MobEffectInstance(MobEffects.JUMP, 600, 1), 1.0f)
+                    .build())));
+
     public static final RegistryObject<Item> PUESTO = ITEMS.register("puesto_doraking",
             () -> new BlockItem(ModBlocks.PUESTO.get(), new Item.Properties()));
 

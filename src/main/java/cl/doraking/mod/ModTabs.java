@@ -18,6 +18,8 @@ public class ModTabs {
                     .displayItems((params, out) -> {
                         out.accept(ModItems.DORAKIN_ANKO.get());
                         out.accept(ModItems.DORAKIN_MANJAR.get());
+                        out.accept(ModItems.DORAKIN_PASTELERA.get());
+                        out.accept(ModItems.DORAKIN_NUTELLA.get());
                         out.accept(ModItems.PUESTO.get());
                         out.accept(ModItems.DUENO_SPAWN_EGG.get());
                     })

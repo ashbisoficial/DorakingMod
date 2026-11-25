@@ -4,5 +4,7 @@
   "block.doraking.puesto_doraking": "Doraking Stall",
   "item.doraking.dueno_doraking_spawn_egg": "Doraking Owner Spawn Egg",
   "entity.doraking.dueno_doraking": "Doraking Owner",
-  "itemGroup.doraking": "Doraking"
+  "itemGroup.doraking": "Doraking",
+  "item.doraking.dorakin_pastelera": "Custard Dorakin",
+  "item.doraking.dorakin_nutella": "Nutella Dorakin"
 }
