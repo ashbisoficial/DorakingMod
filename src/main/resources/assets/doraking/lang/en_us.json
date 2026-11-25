@@ -1,10 +1,10 @@
 {
-  "item.doraking.dorakin_anko": "Anko Dorakin",
-  "item.doraking.dorakin_manjar": "Manjar Dorakin",
-  "block.doraking.puesto_doraking": "Doraking Stall",
-  "item.doraking.dueno_doraking_spawn_egg": "Doraking Owner Spawn Egg",
-  "entity.doraking.dueno_doraking": "Doraking Owner",
+  "item.doraking.dorakin_anko": "Dorayaki relleno de poroto rojo",
+  "item.doraking.dorakin_manjar": "Dorayaki relleno de manjar",
+  "block.doraking.puesto_doraking": "Puesto Doraking",
+  "item.doraking.dueno_doraking_spawn_egg": "Huevo de aparición del Dueño de Doraking",
+  "entity.doraking.dueno_doraking": "Dueño de Doraking",
   "itemGroup.doraking": "Doraking",
-  "item.doraking.dorakin_pastelera": "Custard Dorakin",
-  "item.doraking.dorakin_nutella": "Nutella Dorakin"
+  "item.doraking.dorakin_pastelera": "Dorayaki relleno de pastelera",
+  "item.doraking.dorakin_nutella": "Dorayaki relleno de nutella"
 }
