@@ -3,10 +3,8 @@ package cl.doraking.mod.client;
 import cl.doraking.mod.Doraking;
 import cl.doraking.mod.ModEntities;
 import cl.doraking.mod.entity.DuenoEntity;
-import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.HumanoidMobRenderer;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -17,16 +15,21 @@ import net.minecraftforge.fml.common.Mod;
 public class ClientSetup {
 
     @SubscribeEvent
+    public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(DuenoModel.LAYER, DuenoModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.DUENO.get(), DuenoRenderer::new);
     }
 
-    public static class DuenoRenderer extends HumanoidMobRenderer<DuenoEntity, PlayerModel<DuenoEntity>> {
+    public static class DuenoRenderer extends MobRenderer<DuenoEntity, DuenoModel> {
         private static final ResourceLocation TEXTURE =
                 new ResourceLocation(Doraking.MODID, "textures/entity/dueno.png");
 
         public DuenoRenderer(EntityRendererProvider.Context ctx) {
-            super(ctx, new PlayerModel<>(ctx.bakeLayer(ModelLayers.PLAYER), false), 0.5f);
+            super(ctx, new DuenoModel(ctx.bakeLayer(DuenoModel.LAYER)), 0.6f);
         }
 
         @Override

@@ -1,5 +1,13 @@
 {
   "type": "minecraft:block",
-  "pools": [ { "rolls": 1.0, "entries": [ { "type": "minecraft:item", "name": "doraking:puesto_doraking" } ],
-    "conditions": [ { "condition": "minecraft:survives_explosion" } ] } ]
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [ { "type": "minecraft:item", "name": "doraking:puesto_doraking" } ],
+      "conditions": [
+        { "condition": "minecraft:survives_explosion" },
+        { "condition": "minecraft:block_state_property", "block": "doraking:puesto_doraking", "properties": { "part": "center" } }
+      ]
+    }
+  ]
 }
