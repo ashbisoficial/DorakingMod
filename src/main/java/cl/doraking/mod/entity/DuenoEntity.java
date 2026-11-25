@@ -1,6 +1,8 @@
 package cl.doraking.mod.entity;
 
-import cl.doraking.mod.ModItems;
+import cl.doraking.mod.trade.TradeConfig;
+import cl.doraking.mod.trade.TradeEditorMenu;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -16,7 +18,6 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
@@ -53,27 +54,55 @@ public class DuenoEntity extends AbstractVillager {
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
-        if (isAlive() && !isTrading()) {
-            if (!level().isClientSide) {
-                setTradingPlayer(player);
-                openTradingScreen(player, getDisplayName(), 1);
+        if (!isAlive() || isTrading()) return super.mobInteract(player, hand);
+        // Agachado + clic derecho (operador o creativo): abre el editor de tradeos
+        if (player.isShiftKeyDown() && (player.hasPermissions(2) || player.isCreative())) {
+            if (!level().isClientSide && hand == InteractionHand.MAIN_HAND && player instanceof ServerPlayer sp) {
+                TradeEditorMenu.open(sp);
             }
             return InteractionResult.sidedSuccess(level().isClientSide);
         }
-        return super.mobInteract(player, hand);
+        if (!level().isClientSide) {
+            setTradingPlayer(player);
+            openTradingScreen(player, getDisplayName(), 1);
+        }
+        return InteractionResult.sidedSuccess(level().isClientSide);
     }
 
-    /** Precios en esmeraldas. Cambialos aqui. Compras ilimitadas (maxUses alto). */
+    private int tradesVersion = -1;
+
+    /** Siempre refleja config/doraking_trades.json (se refresca si cambia). */
+    @Override
+    public MerchantOffers getOffers() {
+        MerchantOffers offers = super.getOffers();
+        if (tradesVersion != TradeConfig.version && !isTrading()) {
+            fillOffers(offers);
+        }
+        return offers;
+    }
+
+    private void fillOffers(MerchantOffers offers) {
+        offers.clear();
+        for (TradeConfig.Trade t : TradeConfig.get()) {
+            if (t.b.isEmpty()) {
+                offers.add(new MerchantOffer(t.a.copy(), t.result.copy(), t.maxUses, 0, 0.0f));
+            } else {
+                offers.add(new MerchantOffer(t.a.copy(), t.b.copy(), t.result.copy(), t.maxUses, 0, 0.0f));
+            }
+        }
+        tradesVersion = TradeConfig.version;
+    }
+
+    /** Los tradeos salen de config/doraking_trades.json (editable en el juego). */
     @Override
     protected void updateTrades() {
-        MerchantOffers offers = getOffers();
-        net.minecraft.world.item.Item[] sabores = {
-                ModItems.DORAKIN_ANKO.get(), ModItems.DORAKIN_MANJAR.get(),
-                ModItems.DORAKIN_PASTELERA.get(), ModItems.DORAKIN_NUTELLA.get() };
-        for (net.minecraft.world.item.Item sabor : sabores) {
-            offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 2), new ItemStack(sabor, 1), 9999, 0, 0.0f));
-            offers.add(new MerchantOffer(new ItemStack(Items.EMERALD, 5), new ItemStack(sabor, 3), 9999, 0, 0.0f));
-        }
+        fillOffers(getOffersRaw());
+    }
+
+    private MerchantOffers getOffersRaw() {
+        MerchantOffers o = new MerchantOffers();
+        overrideOffers(o);
+        return o;
     }
 
     @Override

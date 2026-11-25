@@ -35,11 +35,11 @@ public class ModItems {
                     .effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 1200, 0), 1.0f)
                     .build())));
 
-    /** Dorakin de nutella: salto. Solo se consigue comerciando. */
+    /** Dorakin de nutella: vision nocturna (1 minuto). Solo se consigue comerciando. */
     public static final RegistryObject<Item> DORAKIN_NUTELLA = ITEMS.register("dorakin_nutella",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
                     .nutrition(8).saturationMod(0.8f)
-                    .effect(() -> new MobEffectInstance(MobEffects.JUMP, 600, 1), 1.0f)
+                    .effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, 1200, 0), 1.0f)
                     .build())));
 
     public static final RegistryObject<Item> PUESTO = ITEMS.register("puesto_doraking",
